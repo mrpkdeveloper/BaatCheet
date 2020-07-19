@@ -23,7 +23,8 @@ io.on('connection', (socket) => {
     console.log("connected with socket id ", socket.id)
 
     socket.on('msg_send', (data) => {
-        io.emit('msg_rcvds', data)
+        // console.log("rcvd msg " + data.msg)
+        io.emit('msg_rcvd', data)
     })
 
 })
