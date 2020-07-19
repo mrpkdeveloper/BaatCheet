@@ -6,10 +6,10 @@
 // const io = socketio(server)
 
 
-const express = require('express')
-const path = require('path')
-const socketio = require('socket.io')
 const http = require('http')
+const express = require('express')
+// const path = require('path')
+const socketio = require('socket.io')
 
 
 const app = express()
@@ -29,6 +29,6 @@ io.on('connection', (socket) => {
 })
 
 app.use('/', express.static(__dirname + '/public'))
-app.listen(1212, () => {
+server.listen(1212, () => {
     console.log("server started at http://localhost:1212")
 })
