@@ -24,7 +24,8 @@ $('#btnsend').click(() => {
 })
 
 socket.on('msg_rcvd', (data) => {
-    $('#ulmsg').append($('<li>').text(data.msg))
+    $('#ulmsg').append($('<li>').text(`
+    [${data.from}] : ${data.msg}`))
 })
 
 socket.on('login_fail', () => {
