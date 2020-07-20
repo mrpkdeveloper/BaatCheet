@@ -6,6 +6,7 @@ $('#chatbox').hide()
 $('#btnstart').click(() => {
     socket.emit('login', {
         username: $('#inpusername').val(),
+        password: $('#inppass').val(),
 
     })
 })
@@ -24,4 +25,9 @@ $('#btnsend').click(() => {
 
 socket.on('msg_rcvd', (data) => {
     $('#ulmsg').append($('<li>').text(data.msg))
+})
+
+socket.on('login_fail', () => {
+    window.alert("username or password is incorrect")
+
 })

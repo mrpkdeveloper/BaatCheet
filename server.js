@@ -19,14 +19,28 @@ const server = http.createServer(app)
 
 const io = socketio(server)
 
+let users = {
+    'arnav': '1234'
+}
+
+
 io.on('connection', (socket) => {
     console.log("connected with socket id ", socket.id)
 
     socket.on('login', (data) => {
-        // console.log("rcvd msg " + data.msg)
-        // io.emit('msg_rcvd', data)
-        socket.join(data.username)
-        socket.emit('logged_in')
+        if (users[data.username]) {
+            if (users[data.username] == data.password) {
+                socket.join(data.username)
+                socket.emit('logged_in')
+            } else {
+                socket.emit('login_fail')
+            }
+        } else {
+            users[data.username] = data.password
+            socket.join(data.username)
+            socket.emit('logged_in')
+        }
+
     })
 
     socket.on('msg_send', (data) => {
